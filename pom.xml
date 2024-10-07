@@ -44,17 +44,13 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx5-parent</artifactId>
-    <version>5</version>
+    <version>6</version>
   </parent>
 
   <artifactId>vertx-auth-parent</artifactId>
   <version>5.0.0-SNAPSHOT</version>
 
   <name>Vert.x Auth</name>
-
-  <properties>
-    <jar.manifest>${project.basedir}/src/main/resources/META-INF/MANIFEST.MF</jar.manifest>
-  </properties>
 
   <dependencyManagement>
     <dependencies>

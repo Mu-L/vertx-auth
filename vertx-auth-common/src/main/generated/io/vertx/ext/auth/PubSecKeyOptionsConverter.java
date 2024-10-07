@@ -4,16 +4,12 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.json.JsonArray;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
 
 /**
  * Converter and mapper for {@link io.vertx.ext.auth.PubSecKeyOptions}.
  * NOTE: This class has been automatically generated from the {@link io.vertx.ext.auth.PubSecKeyOptions} original class using Vert.x codegen.
  */
 public class PubSecKeyOptionsConverter {
-
-  private static final Base64.Decoder BASE64_DECODER = Base64.getUrlDecoder();
-  private static final Base64.Encoder BASE64_ENCODER = Base64.getUrlEncoder().withoutPadding();
 
    static void fromJson(Iterable<java.util.Map.Entry<String, Object>> json, PubSecKeyOptions obj) {
     for (java.util.Map.Entry<String, Object> member : json) {
@@ -25,7 +21,7 @@ public class PubSecKeyOptionsConverter {
           break;
         case "buffer":
           if (member.getValue() instanceof String) {
-            obj.setBuffer(io.vertx.core.buffer.Buffer.buffer(BASE64_DECODER.decode((String)member.getValue())));
+            obj.setBuffer(io.vertx.core.buffer.Buffer.fromJson((String)member.getValue()));
           }
           break;
         case "id":
@@ -46,7 +42,7 @@ public class PubSecKeyOptionsConverter {
       json.put("algorithm", obj.getAlgorithm());
     }
     if (obj.getBuffer() != null) {
-      json.put("buffer", BASE64_ENCODER.encodeToString(obj.getBuffer().getBytes()));
+      json.put("buffer", obj.getBuffer().toJson());
     }
     if (obj.getId() != null) {
       json.put("id", obj.getId());
