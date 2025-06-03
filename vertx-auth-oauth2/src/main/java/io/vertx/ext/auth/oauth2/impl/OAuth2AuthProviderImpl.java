@@ -546,6 +546,11 @@ public class OAuth2AuthProviderImpl implements OAuth2Auth, Closeable {
           user.attributes()
             .put("rootClaim", "accessToken");
 
+          // scope can be present inside JWT and this should be copied to user principal as it is expected from AuthHandler
+          if (token.containsKey("scope")) {
+            user.principal().put("scope", token.getString("scope"));
+          }
+
         } catch (DecodeException | IllegalArgumentException e) {
           // This set of exceptions here are a valid cases
           // the reason is that it can be for several factors,
@@ -704,8 +709,8 @@ public class OAuth2AuthProviderImpl implements OAuth2Auth, Closeable {
   }
 
   @Override
-  public void close(Promise<Void> onClose) {
+  public void close(Completable<Void> onClose) {
     close();
-    onClose.complete();
+    onClose.succeed();
   }
 }
